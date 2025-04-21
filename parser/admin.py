@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import LinkedInProfile, JobExperience
 
-# Register your models here.
+admin.site.register(LinkedInProfile)
+admin.site.register(JobExperience)
