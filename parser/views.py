@@ -3,7 +3,7 @@ import requests
 
 from bs4 import BeautifulSoup
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import ResumeUploadForm
 from .models import LinkedInProfile, JobExperience
