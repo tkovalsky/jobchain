@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Upload Your LinkedIn PDF</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>
+
+{% if text_output %}
+  <h3>Parsed Text:</h3>
+  <pre>{{ text_output }}</pre>
+{% endif %}
+{% endblock %}

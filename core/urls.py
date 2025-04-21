@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 from dashboard.views import home
 from user_accounts.views import profile, register
+from parser.views import upload_resume
+
 
 
 urlpatterns = [
@@ -26,5 +28,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),  # 🔑 Auth views
     path('profile/', profile, name='profile'),
     path('register/', register, name='register'),
+    path('upload/', upload_resume, name='upload_resume'),
     path('', home, name='home'),
 ]
