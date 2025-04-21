@@ -19,9 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from dashboard.views import home
 from user_accounts.views import profile, register
-from parser.views import upload_resume
-
-
+from parser.views import upload_resume, import_linkedin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +27,6 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('register/', register, name='register'),
     path('upload/', upload_resume, name='upload_resume'),
+    path('import_linkedin/', import_linkedin, name='import_linkedin'),
     path('', home, name='home'),
 ]

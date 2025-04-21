@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.linkedin_url %}
+  <form method="post" action="{% url 'import_linkedin' %}">
+    {% csrf_token %}
+    <button type="submit">Import from LinkedIn</button>
+  </form>
+{% endif %}
+
+<h2>My Profile</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
