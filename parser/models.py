@@ -1,3 +1,5 @@
+import hashlib
+
 from django.db import models
 from django.conf import settings
 
@@ -53,3 +55,28 @@ class UserJobPreference(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s job preferences"
+    
+
+class JobListing(models.Model):
+    source = models.ForeignKey(JobSource, on_delete=models.CASCADE)
+    external_id = models.CharField(max_length=255)  # ID from the source site
+    internal_id = models.CharField(max_length=255, unique=True)  # hashed combo
+    title = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    location = models.CharField(max_length=255, blank=True)
+    url = models.URLField()
+    description = models.TextField(blank=True)
+
+    last_seen = models.DateTimeField(auto_now=True)
+    times_seen = models.IntegerField(default=1)
+    is_active = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        if not self.internal_id:
+            # Generate a unique hash from source + external_id
+            raw = f"{self.source.id}-{self.external_id}"
+            self.internal_id = hashlib.sha256(raw.encode()).hexdigest()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.title} @ {self.company} ({self.location})"
