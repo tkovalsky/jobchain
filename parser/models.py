@@ -33,14 +33,7 @@ class JobExperience(models.Model):
 class JobSource(models.Model):
     name = models.CharField(max_length=100)  # e.g. "Figma"
     base_url = models.URLField()  # e.g. "https://boards.greenhouse.io/figma"
-    scraper_key = models.CharField(max_length=50, choices=[
-        ("greenhouse", "Greenhouse"),
-        ("lever", "Lever"),
-        ("icims", "iCIMS"),
-        ("workday", "Workday"),
-        ("workable", "Workable"),
-        ("smartrecruiters", "SmartRecruiters"),
-    ])
+    scraper_key = models.CharField(max_length=50, help_text="Internal scraper ID (e.g. 'greenhouse', 'lever'). Used for backend routing only.")
     category = models.CharField(max_length=100, blank=True, help_text="Optional: Job Board, Company Site, etc.")
 
     def __str__(self):
