@@ -31,9 +31,9 @@ class JobExperience(models.Model):
         return f"{self.title} at {self.company}"
     
 class JobSource(models.Model):
-    name = models.CharField(max_length=100)
-    base_url = models.URLField()
-    source_type = models.CharField(max_length=50, choices=[
+    name = models.CharField(max_length=100)  # e.g. "Figma"
+    base_url = models.URLField()  # e.g. "https://boards.greenhouse.io/figma"
+    scraper_key = models.CharField(max_length=50, choices=[
         ("greenhouse", "Greenhouse"),
         ("lever", "Lever"),
         ("icims", "iCIMS"),
@@ -41,9 +41,10 @@ class JobSource(models.Model):
         ("workable", "Workable"),
         ("smartrecruiters", "SmartRecruiters"),
     ])
+    category = models.CharField(max_length=100, blank=True, help_text="Optional: Job Board, Company Site, etc.")
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.scraper_key})"
 
 
 class UserJobPreference(models.Model):

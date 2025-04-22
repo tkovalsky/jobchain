@@ -3,6 +3,11 @@ from .models import LinkedInProfile, JobExperience, JobSource, UserJobPreference
 
 admin.site.register(LinkedInProfile)
 admin.site.register(JobExperience)
-admin.site.register(JobSource)
+
+@admin.register(JobSource)
+class JobSourceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'scraper_key', 'category', 'base_url')
+    search_fields = ('name', 'scraper_key')
+
 admin.site.register(UserJobPreference)
 admin.site.register(JobListing)
